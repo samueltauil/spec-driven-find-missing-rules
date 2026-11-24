@@ -6,7 +6,7 @@ _Replay a real-looking epic, ask the questions it never answered, and catch miss
 
 ## Welcome
 
-- **Who is this for**: Product owners, business analysts, testers, developers and architects who finished **Trace the Loop: From Intent to Evidence**, or who can already read an OpenSpec requirement and its scenarios.
+- **Who is this for**: Product owners, business analysts, testers, developers and architects who finished **Trace the Loop from Intent to Evidence**, or who can already read an OpenSpec requirement and its scenarios.
 - **What you'll learn**: How clarifying questions and exception scenarios turn an epic into testable requirements, and how to measure which late-found gaps a spec would have caught.
 - **What you'll build**: A validated OpenSpec change and a gap comparison, shared in a pull request.
 - **Prerequisites**:

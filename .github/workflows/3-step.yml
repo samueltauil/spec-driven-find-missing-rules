@@ -94,8 +94,9 @@ jobs:
           echo "Rows with a Caught by value: ${filled:-none}"
           [ "$(echo "$filled" | wc -w)" -eq 8 ]
 
-      - name: Check the added requirement exists in the spec delta
-        id: check-added-requirement
+      # The next three checks read the same two labels, so each failure gets its own row.
+      - name: Check the Added after the retro section names a gap and a new requirement
+        id: check-added-named
         continue-on-error: true
         run: |
           f=retro/gap-comparison.md
@@ -107,12 +108,39 @@ jobs:
           echo "Requirement: ${req:-none}"
           [ -n "$gap" ] && [ "$gap" -ge 1 ] && [ "$gap" -le 8 ] || { echo "The gap number must be from 1 to 8"; exit 1; }
           [ -n "$req" ] || { echo "No requirement name found"; exit 1; }
+          case "$req" in "<"*) echo "Replace the requirement name placeholder"; exit 1 ;; esac
           [ "$(printf '%s' "$req" | tr '[:upper:]' '[:lower:]')" != "setup lead time" ] || { echo "Name the requirement you added, not the worked example"; exit 1; }
+
+      - name: Check the added requirement is in the spec delta
+        id: check-added-in-delta
+        continue-on-error: true
+        run: |
+          f=retro/gap-comparison.md
+          [ -f "$f" ] || { echo "$f is missing"; exit 1; }
+          label() { tr -d '\r' < "$f" | awk 'tolower($0) ~ /^## +added after the retro/ {f = 1; next} /^## / {f = 0} f' | grep -i -- "$1:" | head -n 1 | sed -E 's/^[^:]*:[*_]*[[:space:]]*//; s/[[:space:]]+$//'; }
+          gap=$(label "Gap number" | grep -oE '[0-9]+' | head -n 1 || true)
+          req=$(label "Requirement" | sed -E 's/^#+[[:space:]]*Requirement:[[:space:]]*//I; s/[`"]//g; s/^[*_[:space:]]+|[*_[:space:]]+$//g')
+          echo "Gap number: ${gap:-none}"
+          echo "Requirement: ${req:-none}"
+          [ -n "$req" ] || { echo "No requirement name found"; exit 1; }
           found=$(cat openspec/changes/add-vision-rider/specs/*/spec.md 2>/dev/null | tr -d '\r' | REQ="$req" awk '
             BEGIN { r = tolower(ENVIRON["REQ"]) }
             /^###[ \t]+Requirement:/ { n = $0; sub(/^###[ \t]+Requirement:[ \t]*/, "", n); sub(/[ \t]+$/, "", n); if (tolower(n) == r) c++ }
             END { print c + 0 }' || true)
           [ "${found:-0}" -ge 1 ] || { echo "No ### Requirement: $req in the add-vision-rider spec delta"; exit 1; }
+
+      - name: Check the gap row names the added requirement
+        id: check-added-in-row
+        continue-on-error: true
+        run: |
+          f=retro/gap-comparison.md
+          [ -f "$f" ] || { echo "$f is missing"; exit 1; }
+          label() { tr -d '\r' < "$f" | awk 'tolower($0) ~ /^## +added after the retro/ {f = 1; next} /^## / {f = 0} f' | grep -i -- "$1:" | head -n 1 | sed -E 's/^[^:]*:[*_]*[[:space:]]*//; s/[[:space:]]+$//'; }
+          gap=$(label "Gap number" | grep -oE '[0-9]+' | head -n 1 || true)
+          req=$(label "Requirement" | sed -E 's/^#+[[:space:]]*Requirement:[[:space:]]*//I; s/[`"]//g; s/^[*_[:space:]]+|[*_[:space:]]+$//g')
+          echo "Gap number: ${gap:-none}"
+          echo "Requirement: ${req:-none}"
+          [ -n "$gap" ] && [ -n "$req" ] || { echo "The gap number or the requirement name is missing"; exit 1; }
           in_row=$(tr -d '\r' < "$f" | GAP="$gap" REQ="$req" awk -F'|' '
             { o = ($1 ~ /^[ \t]*$/) ? 1 : 0; n = $(1 + o); gsub(/[ \t]/, "", n) }
             n ~ /^[1-8]$/ && n + 0 == ENVIRON["GAP"] + 0 { v = $(5 + o); gsub(/[`"*]/, "", v); if (index(tolower(v), tolower(ENVIRON["REQ"])) > 0) c++ }
@@ -142,8 +170,12 @@ jobs:
             results_table:
               - description: "retro/gap-comparison.md has all eight gap rows, each with a Caught by value"
                 passed: ${{ steps.check-gap-rows.outcome == 'success' }}
-              - description: "The Added after the retro section names a gap and the requirement you added for it, which is in the spec delta and in that row of the table"
-                passed: ${{ steps.check-added-requirement.outcome == 'success' }}
+              - description: "The Added after the retro section names a gap from 1 to 8 and the requirement you added, not Setup lead time"
+                passed: ${{ steps.check-added-named.outcome == 'success' }}
+              - description: "That requirement name matches a ### Requirement: heading in the add-vision-rider spec delta"
+                passed: ${{ steps.check-added-in-delta.outcome == 'success' }}
+              - description: "The Caught by cell in the row of that gap names the same requirement"
+                passed: ${{ steps.check-added-in-row.outcome == 'success' }}
               - description: "The add-vision-rider change passes openspec validate --strict"
                 passed: ${{ steps.check-validate.outcome == 'success' }}
             tips: ${{ contains(steps.*.outcome, 'failure') && '["Fill the Caught by cell of every row from 1 to 8. If nothing catches a gap, write Missed.", "Under ## Added after the retro, replace both placeholders, and copy the requirement name exactly as it appears after ### Requirement: in the spec delta. Name the requirement you added, not Setup lead time.", "Write the same requirement name in the Caught by cell of the gap you picked.", "Run npx openspec validate add-vision-rider --strict and fix every error.", "Commit and push to vision-retro again. Mona checks the pull request on every push."]' || '[]' }}

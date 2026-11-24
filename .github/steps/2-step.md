@@ -1,6 +1,6 @@
 ## Step 2: Turn answers into testable requirements
 
-Good questions, @{{ login }}! The product owner sat down with your team and answered seven of them. In 2025, the team learned each of these answers only during build, in acceptance testing or after go-live. Now turn them into rules a team can check before anyone builds. Copilot drafts; you decide what stays.
+Good questions, @{{ login }}! The product owner sat down with your team and answered seven questions. In 2025, the team learned each of these answers only during build, in acceptance testing or after go-live. Now turn them into rules a team can check before anyone builds. Copilot drafts; you decide what stays.
 
 ### 📖 Theory: Testable requirements and exception scenarios
 
@@ -11,6 +11,8 @@ An [OpenSpec change](https://github.com/Fission-AI/OpenSpec/blob/main/docs/conce
 ### ⌨️ Activity 1: Read the answers and write the proposal
 
 1. In your codespace, create `retro/answers.md` and paste the product owner's answers into it. Read them as you go.
+
+   > 💡 **Tip:** To create the file, right-click the `retro` folder in the Explorer, select **New File...**, and type `answers.md`.
 
    ```markdown
    # Product owner's answers
@@ -123,18 +125,28 @@ An [OpenSpec change](https://github.com/Fission-AI/OpenSpec/blob/main/docs/conce
 
 1. Fix every error until the output says `Change 'add-vision-rider' is valid`. Then check that the file has at least three `### Requirement:` headings.
 
-1. Save, then commit `retro/answers.md` and the `openspec/changes` folder with your own message, and push to `vision-retro` as you did in step 1.
+1. Save, then commit `retro/answers.md` and the `openspec/changes` folder, and push to `vision-retro`.
+
+   > ![Terminal command](https://img.shields.io/badge/Terminal-text?style=flat&logo=gnometerminal&labelColor=1f2328&color=eee)
+   >
+   > ```bash
+   > git add retro/answers.md openspec/changes
+   > git commit -m "Turn the answers into testable requirements"
+   > git push
+   > ```
 
 1. Go back to this issue in your browser. Wait a moment for Mona to check your work, provide feedback, and share the next lesson.
 
 <details>
 <summary>Having trouble? 🤷</summary><br/>
 
-- **`should contain SHALL or MUST`:** Write the keyword in capitals in the rule text, on the lines between the `### Requirement:` heading and its first scenario.
+- **`should contain SHALL or MUST`:** Write the keyword in capitals in the rule text, on the lines between the `### Requirement:` heading and its first scenario. In strict mode this warning fails validation, so fix it like an error.
 
 - **`must include at least one scenario`:** Scenario headings need exactly four `#` characters: `#### Scenario:`.
 
 - **`Change must have at least one delta`:** Check the path, `specs/vision-rider/spec.md` inside `openspec/changes/add-vision-rider`, and the heading `## ADDED Requirements`.
+
+- **`Unknown item 'add-vision-rider'`:** The folder has another name. It must be exactly `openspec/changes/add-vision-rider`. Right-click it in the Explorer and select **Rename...**.
 
 - **Mona counts fewer requirements than you pasted:** Copied chat text can lose its `#` characters. Each rule needs its own `### Requirement:` line and each scenario its own `#### Scenario:` line.
 

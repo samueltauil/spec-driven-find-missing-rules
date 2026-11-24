@@ -130,7 +130,7 @@ jobs:
                 passed: ${{ steps.check-requirements.outcome == 'success' }}
               - description: "The add-vision-rider change passes openspec validate --strict"
                 passed: ${{ steps.check-validate.outcome == 'success' }}
-            tips: ${{ contains(steps.*.outcome, 'failure') && '["Name the folder openspec/changes/add-vision-rider, and replace each comment in proposal.md with your own words.", "Keep at least three requirements in specs/vision-rider/spec.md under ## ADDED Requirements.", "Run npx openspec validate add-vision-rider --strict in the terminal and fix every error. Each requirement needs MUST or SHALL in capitals and a #### Scenario: with GIVEN, WHEN and THEN.", "Commit and push to vision-retro again."]' || '[]' }}
+            tips: ${{ contains(steps.*.outcome, 'failure') && '["Name the folder openspec/changes/add-vision-rider, and replace each comment in proposal.md with your own words.", "Keep at least three requirements in specs/vision-rider/spec.md under ## ADDED Requirements. Each one needs its own line that starts with ### Requirement: (text copied from chat can lose its # characters).", "Run npx openspec validate add-vision-rider --strict in the terminal and fix every error. Each requirement needs MUST or SHALL in capitals and a #### Scenario: with GIVEN, WHEN and THEN.", "Commit and push to vision-retro again."]' || '[]' }}
 
       # END: Check practical exercise
 

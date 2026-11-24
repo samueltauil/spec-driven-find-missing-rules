@@ -61,6 +61,8 @@ Your copy of this repository comes with a ready-made [codespace](https://docs.gi
 
 1. Open Copilot Chat: select the chat icon at the top of the editor, or press `Ctrl+Alt+I` (`⌃⌘I` on Mac). If the chat box shows a mode picker, choose **Ask**, so Copilot answers without editing files.
 
+   <img width="320" alt="The Copilot Chat mode picker open above the chat box, with Ask highlighted between Agent and Plan" src="../images/copilot-ask-mode.png">
+
 1. Ask Copilot for the questions you haven't thought of yet. The first sentence keeps it read-only.
 
    > ![Copilot prompt](https://img.shields.io/badge/-Prompt-text?style=social&logo=github%20copilot)
@@ -100,6 +102,6 @@ Your copy of this repository comes with a ready-made [codespace](https://docs.gi
 
 - **Mona says there are fewer than five questions:** Mona counts numbered lines that end with `?`, such as `2. Who can approve a shorter lead time?`. The example question counts. Start each question on its own line with a number and a period.
 
-- **Mona did not respond:** Check that you pushed to the `vision-retro` branch and that `retro/questions.md` changed. You can watch the run in the [Actions tab](https://github.com/{{ full_repo_name }}/actions).
+- **Mona did not respond:** Check that `git push` finished without an error, and run `git branch --show-current`. If the branch isn't `vision-retro`, run `git switch -c vision-retro`, then `git push -u origin vision-retro`. You can watch the run in the [Actions tab](https://github.com/{{ full_repo_name }}/actions).
 
 </details>

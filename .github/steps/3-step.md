@@ -75,7 +75,7 @@ In 2025, build ran in weeks 1 to 8, acceptance testing in weeks 9 to 11, and the
 
 1. Pick one row you marked `Missed`. If none, pick gap 2, **Partner's file layout**: none of the product owner's answers covered it, so it is easy to miss.
 
-1. Add a requirement for it to `openspec/changes/add-vision-rider/specs/vision-rider/spec.md`, under `## ADDED Requirements`, with at least one scenario. The gap log is now your source, so the rule must trace to what happened. You can ask Copilot for a draft as in step 2, then review it with the same checklist.
+1. Add a requirement for it to `openspec/changes/add-vision-rider/specs/vision-rider/spec.md`, under `## ADDED Requirements`, with at least one scenario. The gap log is now your source, so the rule must trace to what happened. You can ask Copilot for a draft as in step 2, then review it with the same checklist, using the gap log in place of the answers: the rule closes the gap and adds nothing the gap log doesn't state.
 
 1. In `retro/gap-comparison.md`, write the new requirement's name in that row's **Caught by** cell. Then add this section at the end of the file and replace both placeholders.
 
