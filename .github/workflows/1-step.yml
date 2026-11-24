@@ -1,0 +1,160 @@
+name: Step 1
+
+on:
+  # Manual re-run for facilitators and testing.
+  workflow_dispatch:
+  # The learner pushes the questions to a branch that does not exist in the template.
+  push:
+    branches:
+      - vision-retro
+    paths:
+      - retro/questions.md
+
+# Least privilege: no default permissions; each job asks only for what it uses.
+permissions: {}
+
+# A quick second push cancels the run it supersedes instead of grading twice.
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: true
+
+env:
+  STEP_2_FILE: ".github/steps/2-step.md"
+
+jobs:
+  find_exercise:
+    name: Find Exercise Issue
+    permissions:
+      issues: read # locate the exercise issue
+    uses: skills/exercise-toolkit/.github/workflows/find-exercise-issue.yml@v0.9.3
+
+  check_step_work:
+    name: Check step work
+    runs-on: ubuntu-latest
+    needs: [find_exercise]
+    permissions:
+      contents: read # read the learner's files
+      issues: write # update Mona's feedback comment
+      # No actions: write. A learner-triggered job must not enable or disable workflows.
+    env:
+      ISSUE_REPOSITORY: ${{ github.repository }}
+      ISSUE_NUMBER: ${{ needs.find_exercise.outputs.issue-number }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Get response templates
+        uses: actions/checkout@v6
+        with:
+          repository: skills/exercise-toolkit
+          path: exercise-toolkit
+          ref: v0.9.3
+
+      - name: Find last comment
+        id: find-last-comment
+        uses: peter-evans/find-comment@v4
+        with:
+          repository: ${{ env.ISSUE_REPOSITORY }}
+          issue-number: ${{ env.ISSUE_NUMBER }}
+          comment-author: github-actions[bot] # never target the learner's own comment
+          direction: last
+
+      - name: Update comment - checking work
+        uses: GrantBirki/comment@v2.1.1
+        with:
+          repository: ${{ env.ISSUE_REPOSITORY }}
+          issue-number: ${{ env.ISSUE_NUMBER }}
+          comment-id: ${{ steps.find-last-comment.outputs.comment-id }}
+          file: exercise-toolkit/markdown-templates/step-feedback/checking-work.md
+          edit-mode: replace
+
+      # START: Check practical exercise
+      # A question is a numbered line that ends with a question mark. The example question counts.
+
+      - name: Check there are at least five numbered questions
+        id: check-questions
+        continue-on-error: true
+        run: |
+          [ -f retro/questions.md ] || { echo "retro/questions.md is missing"; exit 1; }
+          count=$(tr -d '\r' < retro/questions.md | grep -cE '^[[:space:]]*[0-9]+[.)][[:space:]]+.*\?[*_[:space:]]*$' || true)
+          echo "Numbered questions: ${count:-0}"
+          [ "${count:-0}" -ge 5 ]
+
+      - name: Update comment - step results
+        uses: GrantBirki/comment@v2.1.1
+        with:
+          repository: ${{ env.ISSUE_REPOSITORY }}
+          issue-number: ${{ env.ISSUE_NUMBER }}
+          comment-id: ${{ steps.find-last-comment.outputs.comment-id }}
+          edit-mode: replace
+          file: exercise-toolkit/markdown-templates/step-feedback/step-results-table.md
+          # Tips render only when a check failed. Keep tip text free of single quotes.
+          vars: |
+            step_number: 1
+            results_table:
+              - description: "retro/questions.md has at least five numbered questions, including the example"
+                passed: ${{ steps.check-questions.outcome == 'success' }}
+            tips: ${{ contains(steps.*.outcome, 'failure') && '["Put each question on its own line that starts with a number and a period, such as 2. Who can approve a shorter lead time?", "End every question with a question mark, then save, commit and push to the vision-retro branch again."]' || '[]' }}
+
+      # END: Check practical exercise
+
+      - name: Fail job if not all checks passed
+        if: contains(steps.*.outcome, 'failure')
+        run: exit 1
+
+  post_next_step_content:
+    name: Post next step content
+    needs: [find_exercise, check_step_work] # grading must gate progress
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read # checkout step content
+      actions: write # disable this step and enable the next one
+      issues: write # post step content and progress comments
+    env:
+      ISSUE_REPOSITORY: ${{ github.repository }}
+      ISSUE_NUMBER: ${{ needs.find_exercise.outputs.issue-number }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Get response templates
+        uses: actions/checkout@v6
+        with:
+          repository: skills/exercise-toolkit
+          path: exercise-toolkit
+          ref: v0.9.3
+
+      - name: Create comment - step finished
+        uses: GrantBirki/comment@v2.1.1
+        with:
+          repository: ${{ env.ISSUE_REPOSITORY }}
+          issue-number: ${{ env.ISSUE_NUMBER }}
+          file: exercise-toolkit/markdown-templates/step-feedback/step-finished-prepare-next-step.md
+          vars: |
+            next_step_number: 2
+
+      - name: Create comment - add step content
+        uses: GrantBirki/comment@v2.1.1
+        with:
+          repository: ${{ env.ISSUE_REPOSITORY }}
+          issue-number: ${{ env.ISSUE_NUMBER }}
+          file: ${{ env.STEP_2_FILE }}
+          vars: |
+            login: ${{ github.actor }}
+            full_repo_name: ${{ github.repository }}
+
+      - name: Create comment - watching for progress
+        uses: GrantBirki/comment@v2.1.1
+        with:
+          repository: ${{ env.ISSUE_REPOSITORY }}
+          issue-number: ${{ env.ISSUE_NUMBER }}
+          file: exercise-toolkit/markdown-templates/step-feedback/watching-for-progress.md
+
+      - name: Disable current workflow and enable next one
+        run: |
+          gh workflow disable "${{ github.workflow }}"
+          gh workflow enable "Step 2"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
