@@ -10,12 +10,19 @@
   "updateContentCommand": "npm ci",
   "customizations": {
     "codespaces": {
-      "openFiles": ["retro/original-epic.md"]
+      "openFiles": [
+        "retro/original-epic.md"
+      ]
     },
     "vscode": {
       "extensions": [
         "GitHub.copilot-chat"
-      ]
+      ],
+      "settings": {
+        "search.exclude": {
+          ".github/**": true
+        }
+      }
     }
   }
 }

@@ -1,6 +1,6 @@
 ## Step 1: Question the epic
 
-<img width="800" alt="Exercise banner: Find the Missing Rules Before You Build, exercise 2 of 4 of the Spec-Driven Delivery workshop. Question a thin epic, then write the missing rules as a valid OpenSpec change" src="../images/banner.png">
+<img width="800" alt="Exercise 2 of 4 of the Spec-Driven Delivery workshop: Find the Missing Rules Before You Build. Question a thin epic, then write the missing rules as a valid OpenSpec change. Tools: Codespaces, GitHub Copilot and OpenSpec. Focus of this exercise: Intent, Requirement and Scenario." src="../images/banner.png">
 
 Welcome to the Contoso Health Plan delivery team, @{{ login }}! :wave: In 2025, the team built a vision rider for employer groups from a five-story epic. Eight rules surfaced late, most of them in acceptance testing or after go-live. Your team starts a similar rider next quarter, so first you'll replay the 2025 epic: which questions would have found the missing rules before anyone built anything?
 
@@ -18,13 +18,15 @@ Your copy of this repository comes with a ready-made [codespace](https://docs.gi
 
    [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/{{ full_repo_name }}?quickstart=1)
 
-1. On the codespace page, check that the repository is `{{ full_repo_name }}`, your copy, and not the original exercise. Then create the codespace.
+1. On the codespace page, check that the repository is `{{ full_repo_name }}`, your copy, and not the original exercise. Then select **Create new codespace**. If you already have a codespace for this repository, the page offers **Resume this codespace** instead; that works too.
 
-1. Wait for the editor to open. The first start takes about 2 to 4 minutes. You are ready when the bottom-left of the Status Bar shows **Codespaces** followed by the codespace name, and the epic, `retro/original-epic.md`, is open.
+1. Wait for the editor to open. The first start takes about 2 to 4 minutes, because the codespace installs everything this exercise needs before it opens.
 
-   <img width="400" alt="Bottom-left corner of the editor: the Status Bar shows Codespaces followed by the codespace name, here expert couscous" src="../images/codespaces-status.png">
+   > ⏳ **Wait:** You are ready when the bottom-left corner of the editor shows **Codespaces** followed by your codespace's name, and the epic, `retro/original-epic.md`, is open.
 
-1. In the terminal, create a branch for your work.
+   <img width="400" alt="The bottom-left corner of the editor's Status Bar showing Codespaces followed by a generated codespace name" src="../images/codespaces-status.png">
+
+1. Open a terminal with `` Ctrl+` `` (`` ⌃` `` on Mac), or from the menu (☰) at the top left with **Terminal** > **New Terminal**. Then create a branch for your work.
 
    > ![Terminal command](https://img.shields.io/badge/Terminal-text?style=flat&logo=gnometerminal&labelColor=1f2328&color=eee)
    >
@@ -35,13 +37,13 @@ Your copy of this repository comes with a ready-made [codespace](https://docs.gi
 <details>
 <summary>Having trouble? 🤷</summary><br/>
 
-- **No terminal is visible:** Open one from the editor menu with **Terminal** > **New Terminal**, or press `` Ctrl+` `` (`` ⌃` `` on Mac). The terminal is the **TERMINAL** tab of the panel at the bottom of the editor.
+- **No terminal is visible:** In the panel at the bottom of the editor, select the **TERMINAL** tab. If there is no panel, press `` Ctrl+` `` (`` ⌃` `` on Mac).
 
-  <img width="460" alt="Panel tabs at the bottom of the editor: PROBLEMS, OUTPUT, DEBUG CONSOLE, TERMINAL and PORTS, with TERMINAL selected" src="../images/terminal-tab.png">
+  <img width="460" alt="The editor's bottom panel with the TERMINAL tab selected, next to PROBLEMS, OUTPUT, DEBUG CONSOLE and PORTS" src="../images/terminal-tab.png">
 
 - **The codespace opened the original exercise:** Close that tab and use the button above, which points to your copy. You can also start one from your repository page: **Code** > **Codespaces** > **Create codespace on main**.
 
-- **`npm ci` failed during setup:** Run `npm ci` yourself in the terminal. You need it in step 2.
+- **A command says a package is missing:** The setup did not finish. Run `npm ci` in the terminal, then try again.
 
 - **Copilot Chat asks you to sign in:** Select the Copilot icon in the Status Bar, then sign in with your GitHub account.
 
@@ -91,6 +93,8 @@ Your copy of this repository comes with a ready-made [codespace](https://docs.gi
 <summary>Having trouble? 🤷</summary><br/>
 
 - **Copilot answered the questions or drafted requirements:** Ignore the answers. Only the product owner can answer, and you'll get those answers in step 2. Ask again and repeat the last sentence of the prompt.
+
+- **Copilot stops answering or says you've reached a limit:** The prompt only adds ideas. Write one more question yourself for each lens you haven't used yet, then continue.
 
 - **Copilot edited a file:** Check `retro/questions.md` and remove anything you didn't choose to keep. Then choose **Ask** in the chat and ask again.
 

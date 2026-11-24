@@ -43,7 +43,7 @@ Pick an epic in your team's backlog before its next refinement. Write five quest
 
 ### What's next?
 
-<img width="800" alt="Workshop map: four exercises in a row. Exercise 2, Find the missing rules, is highlighted as You are here. Next come Deliver a behavior and Draft your first spec." src="../images/workshop-map.png">
+<img width="800" alt="Workshop map, Spec-driven delivery workshop: four exercises, one delivery loop. 1, Trace the loop: intent to evidence. 2, Find the missing rules: before you build. 3, Deliver a behavior: test-first, with Copilot. 4, Draft your first spec: capstone. Exercise 2 is highlighted: You are here." src="../images/workshop-map.png">
 
 - Continue with exercise 3, **Deliver an Approved Behavior with Copilot**, where you build one approved behavior from its spec and scenarios.
 - Read [Writing specs](https://github.com/Fission-AI/OpenSpec/blob/main/docs/writing-specs.md) in the OpenSpec documentation to learn more about requirements and scenarios.

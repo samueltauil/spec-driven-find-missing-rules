@@ -124,7 +124,7 @@ An [OpenSpec change](https://github.com/Fission-AI/OpenSpec/blob/main/docs/conce
 
 1. Save, then commit `retro/answers.md` and the `openspec/changes` folder with your own message, and push to `vision-retro` as you did in step 1.
 
-1. Wait a moment for Mona to check your work, provide feedback, and share the next lesson.
+1. Go back to this issue in your browser. Wait a moment for Mona to check your work, provide feedback, and share the next lesson.
 
 <details>
 <summary>Having trouble? 🤷</summary><br/>
@@ -136,6 +136,8 @@ An [OpenSpec change](https://github.com/Fission-AI/OpenSpec/blob/main/docs/conce
 - **`Change must have at least one delta`:** Check the path, `specs/vision-rider/spec.md` inside `openspec/changes/add-vision-rider`, and the heading `## ADDED Requirements`.
 
 - **Copilot added a rule the answers don't state,** such as an age limit or a number of days: Delete it, or write it down as a new question for the product owner. A plausible rule that nobody decided is still a guess.
+
+- **Copilot stops answering or says you've reached a limit:** Write the two requirements yourself. Copy the shape of `Setup lead time` and turn answers 1 and 6 into rules.
 
 - **`npx` asks to install a package:** Answer `n`, run `npm ci`, then run the command again.
 
