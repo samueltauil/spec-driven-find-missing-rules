@@ -96,18 +96,18 @@ In 2025, build ran in weeks 1 to 8, acceptance testing in weeks 9 to 11, and the
 
    > 💡 **Tip:** If a **Compare & pull request** banner appears for `vision-retro`, you can use it instead.
 
-   <img width="600" alt="A repository page with a yellow banner about a branch with recent pushes and a green Compare and pull request button. The branch name in the screenshot is an example." src="../images/compare-pull-request.png">
+   <img width="600" alt="A repository page with a yellow banner about a branch with recent pushes and a green Compare and pull request button. The branch name in the screenshot is an example; yours is vision-retro." src="../images/compare-pull-request.png">
 
 1. Give it a short title, such as `Retro-spec for the vision rider`, and create the pull request.
 
-1. Wait a moment for Mona to check your work, provide feedback, and share the next lesson.
+1. Go back to the exercise issue. Wait a moment for Mona to check your work, provide feedback, and share the next lesson.
 
 <details>
 <summary>Having trouble? 🤷</summary><br/>
 
 - **Mona says a row has no Caught by value:** Fill every row from 1 to 8. If nothing catches a gap, write `Missed`.
 
-- **Mona can't find the requirement:** Copy the name exactly from the `### Requirement:` heading in the delta, without the `### Requirement:` part, and replace the `<n>` placeholder with the gap number.
+- **Mona can't find the requirement:** Copy the name exactly from the `### Requirement:` heading in the delta, without the `### Requirement:` part, and replace the `<n>` placeholder with the gap number. Write the same name in that gap's **Caught by** cell. Name the requirement you added in this step, not `Setup lead time`.
 
 - **Mona says validation failed:** Run `npx openspec validate add-vision-rider --strict` and fix every error. A new requirement needs MUST or SHALL in its rule text and a `#### Scenario:`.
 

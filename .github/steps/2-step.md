@@ -58,7 +58,7 @@ An [OpenSpec change](https://github.com/Fission-AI/OpenSpec/blob/main/docs/conce
 
 - **None of your questions matched an answer:** That's useful evidence, not a mistake. Note which lens you skipped; step 3 measures what it would have cost.
 
-- **The folder has another name:** The folder must be exactly `openspec/changes/add-vision-rider`, all lowercase with hyphens. Rename it in the Explorer with `F2`.
+- **The folder has another name:** The folder must be exactly `openspec/changes/add-vision-rider`, all lowercase with hyphens. Right-click it in the Explorer and select **Rename...**.
 
 </details>
 
@@ -101,6 +101,7 @@ An [OpenSpec change](https://github.com/Fission-AI/OpenSpec/blob/main/docs/conce
    > GIVEN, WHEN and THEN lines. Add an exception scenario wherever something can
    > go wrong. Say which answer each rule comes from. Use only the answers; do not
    > add rules, numbers or roles that they do not state.
+   > Put all the requirements in one markdown code block.
    > ```
 
 1. Review Copilot's draft against this checklist before you keep anything:
@@ -110,7 +111,7 @@ An [OpenSpec change](https://github.com/Fission-AI/OpenSpec/blob/main/docs/conce
    - Each requirement has a scenario, and every rule that can go wrong has an exception scenario.
    - Nothing is invented: no rule, number, age or role that the answers don't state.
 
-1. Paste the requirements that pass the checklist below the worked requirement, under the same `## ADDED Requirements` heading. Fix or delete the rest. Keep at least two, so the delta has at least three requirements.
+1. Paste the requirements that pass the checklist below the worked requirement, under the same `## ADDED Requirements` heading. Use the code block's copy button so the `###` and `####` markers come with it. Fix or delete the rest. Keep at least two, so the delta has at least three requirements.
 
 1. Predict whether strict validation will pass on the first try. Then run it.
 
@@ -120,7 +121,7 @@ An [OpenSpec change](https://github.com/Fission-AI/OpenSpec/blob/main/docs/conce
    > npx openspec validate add-vision-rider --strict
    > ```
 
-1. Fix every error until the output says `Change 'add-vision-rider' is valid`.
+1. Fix every error until the output says `Change 'add-vision-rider' is valid`. Then check that the file has at least three `### Requirement:` headings.
 
 1. Save, then commit `retro/answers.md` and the `openspec/changes` folder with your own message, and push to `vision-retro` as you did in step 1.
 
@@ -135,9 +136,13 @@ An [OpenSpec change](https://github.com/Fission-AI/OpenSpec/blob/main/docs/conce
 
 - **`Change must have at least one delta`:** Check the path, `specs/vision-rider/spec.md` inside `openspec/changes/add-vision-rider`, and the heading `## ADDED Requirements`.
 
+- **Mona counts fewer requirements than you pasted:** Copied chat text can lose its `#` characters. Each rule needs its own `### Requirement:` line and each scenario its own `#### Scenario:` line.
+
 - **Copilot added a rule the answers don't state,** such as an age limit or a number of days: Delete it, or write it down as a new question for the product owner. A plausible rule that nobody decided is still a guess.
 
 - **Copilot stops answering or says you've reached a limit:** Write the two requirements yourself. Copy the shape of `Setup lead time` and turn answers 1 and 6 into rules.
+
+- **`git commit` says nothing added to commit:** New files must be added first: `git add retro/answers.md openspec/changes`, then commit and push.
 
 - **`npx` asks to install a package:** Answer `n`, run `npm ci`, then run the command again.
 

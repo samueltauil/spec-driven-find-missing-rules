@@ -19,7 +19,7 @@ Try to answer from memory before you peek. Recalling is what makes it stick.
 <details>
 <summary>Four gaps surfaced after go-live. Which lenses would have found them?</summary><br/>
 
-**When?** found the lead time and mid-year additions, **What proves it is ready?** found administrator readiness, and **What stops or undoes it?** found the group that ended before go-live. Those lenses find the most expensive gaps, because their rules only show up when something goes wrong.
+**When?** would have found the lead time and mid-year additions, **What proves it is ready?** administrator readiness, and **What stops or undoes it?** the group that ended before go-live. Their rules only show up when something goes wrong, so they reach members unless someone asks first.
 
 </details>
 
@@ -46,5 +46,5 @@ Pick an epic in your team's backlog before its next refinement. Write five quest
 <img width="800" alt="Workshop map, Spec-driven delivery workshop: four exercises, one delivery loop. 1, Trace the loop: intent to evidence. 2, Find the missing rules: before you build. 3, Deliver a behavior: test-first, with Copilot. 4, Draft your first spec: capstone. Exercise 2 is highlighted: You are here." src="../images/workshop-map.png">
 
 - Continue with exercise 3, **Deliver an Approved Behavior with Copilot**, where you build one approved behavior from its spec and scenarios.
-- Read [Writing specs](https://github.com/Fission-AI/OpenSpec/blob/main/docs/writing-specs.md) in the OpenSpec documentation to learn more about requirements and scenarios.
+- Read [Writing good specs](https://github.com/Fission-AI/OpenSpec/blob/main/docs/writing-specs.md) in the OpenSpec documentation to learn more about requirements and scenarios.
 - Explore more [GitHub Skills exercises](https://learn.github.com/skills).

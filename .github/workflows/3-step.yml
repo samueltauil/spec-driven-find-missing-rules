@@ -107,11 +107,17 @@ jobs:
           echo "Requirement: ${req:-none}"
           [ -n "$gap" ] && [ "$gap" -ge 1 ] && [ "$gap" -le 8 ] || { echo "The gap number must be from 1 to 8"; exit 1; }
           [ -n "$req" ] || { echo "No requirement name found"; exit 1; }
+          [ "$(printf '%s' "$req" | tr '[:upper:]' '[:lower:]')" != "setup lead time" ] || { echo "Name the requirement you added, not the worked example"; exit 1; }
           found=$(cat openspec/changes/add-vision-rider/specs/*/spec.md 2>/dev/null | tr -d '\r' | REQ="$req" awk '
             BEGIN { r = tolower(ENVIRON["REQ"]) }
             /^###[ \t]+Requirement:/ { n = $0; sub(/^###[ \t]+Requirement:[ \t]*/, "", n); sub(/[ \t]+$/, "", n); if (tolower(n) == r) c++ }
             END { print c + 0 }' || true)
           [ "${found:-0}" -ge 1 ] || { echo "No ### Requirement: $req in the add-vision-rider spec delta"; exit 1; }
+          in_row=$(tr -d '\r' < "$f" | GAP="$gap" REQ="$req" awk -F'|' '
+            { o = ($1 ~ /^[ \t]*$/) ? 1 : 0; n = $(1 + o); gsub(/[ \t]/, "", n) }
+            n ~ /^[1-8]$/ && n + 0 == ENVIRON["GAP"] + 0 { v = $(5 + o); gsub(/[`"*]/, "", v); if (index(tolower(v), tolower(ENVIRON["REQ"])) > 0) c++ }
+            END { print c + 0 }' || true)
+          [ "${in_row:-0}" -ge 1 ] || { echo "Row $gap does not name $req in its Caught by cell"; exit 1; }
 
       - name: Check the change passes strict validation
         id: check-validate
@@ -136,11 +142,11 @@ jobs:
             results_table:
               - description: "retro/gap-comparison.md has all eight gap rows, each with a Caught by value"
                 passed: ${{ steps.check-gap-rows.outcome == 'success' }}
-              - description: "The Added after the retro section names a gap number and a requirement that exists in the spec delta"
+              - description: "The Added after the retro section names a gap and the requirement you added for it, which is in the spec delta and in that row of the table"
                 passed: ${{ steps.check-added-requirement.outcome == 'success' }}
               - description: "The add-vision-rider change passes openspec validate --strict"
                 passed: ${{ steps.check-validate.outcome == 'success' }}
-            tips: ${{ contains(steps.*.outcome, 'failure') && '["Fill the Caught by cell of every row from 1 to 8. If nothing catches a gap, write Missed.", "Under ## Added after the retro, replace both placeholders, and copy the requirement name exactly as it appears after ### Requirement: in the spec delta.", "Run npx openspec validate add-vision-rider --strict and fix every error.", "Commit and push to vision-retro again. Mona checks the pull request on every push."]' || '[]' }}
+            tips: ${{ contains(steps.*.outcome, 'failure') && '["Fill the Caught by cell of every row from 1 to 8. If nothing catches a gap, write Missed.", "Under ## Added after the retro, replace both placeholders, and copy the requirement name exactly as it appears after ### Requirement: in the spec delta. Name the requirement you added, not Setup lead time.", "Write the same requirement name in the Caught by cell of the gap you picked.", "Run npx openspec validate add-vision-rider --strict and fix every error.", "Commit and push to vision-retro again. Mona checks the pull request on every push."]' || '[]' }}
 
       # END: Check practical exercise
 

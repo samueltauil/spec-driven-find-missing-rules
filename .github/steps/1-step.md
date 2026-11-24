@@ -59,7 +59,7 @@ Your copy of this repository comes with a ready-made [codespace](https://docs.gi
 
    > 💡 **Tip:** Ask for a rule, not a solution. "What happens if a group leaves before go-live?" finds a rule. "Should we build a cancel button?" picks a design.
 
-1. Open Copilot Chat: select the chat icon at the top of the window, or press `Ctrl+Alt+I` (`⌃⌘I` on Mac). If the chat box shows a mode picker, choose **Ask**, so Copilot answers without editing files.
+1. Open Copilot Chat: select the chat icon at the top of the editor, or press `Ctrl+Alt+I` (`⌃⌘I` on Mac). If the chat box shows a mode picker, choose **Ask**, so Copilot answers without editing files.
 
 1. Ask Copilot for the questions you haven't thought of yet. The first sentence keeps it read-only.
 
