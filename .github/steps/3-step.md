@@ -51,14 +51,14 @@ In 2025, build ran in weeks 1 to 8, acceptance testing in weeks 9 to 11, and the
    <details>
    <summary>What each gap cost in 2025 (illustrative)</summary>
 
-   1. **No named approver:** a package reached testing with the wrong frames allowance. 3 days of rework.
-   1. **Partner's file layout:** Fabrikam's file had no code for the new rider, and its change window held up file testing. 10 days of waiting and 2 days of rework.
-   1. **Dependents:** dependents were missing from the eligibility file. 4 days of rework.
-   1. **New-hire waiting period:** new hires showed as covered before their medical started. 3 days of rework.
-   1. **Lead time:** a group's rider started 12 days after its request, before setup was done. 6 days of rework and one group's claims reprocessed.
-   1. **Administrator readiness:** Fabrikam rejected the first live file, and providers could not find members for 4 days. 8 days of rework and about 60 member calls.
-   1. **Group ends before go-live:** a terminated group stayed on Fabrikam's file. 3 days of rework.
-   1. **Mid-year additions:** July starters got half allowances, and their claims were adjusted. 5 days of rework and about 40 claims adjusted.
+   - **1. No named approver:** a package reached testing with the wrong frames allowance. 3 days of rework.
+   - **2. Partner's file layout:** Fabrikam's file had no code for the new rider, and its change window held up file testing. 10 days of waiting and 2 days of rework.
+   - **3. Dependents:** dependents were missing from the eligibility file. 4 days of rework.
+   - **4. New-hire waiting period:** new hires showed as covered before their medical started. 3 days of rework.
+   - **5. Lead time:** a group's rider started 12 days after its request, before setup was done. 6 days of rework and one group's claims reprocessed.
+   - **6. Administrator readiness:** Fabrikam rejected the first live file, and providers could not find members for 4 days. 8 days of rework and about 60 member calls.
+   - **7. Group ends before go-live:** a terminated group stayed on Fabrikam's file. 3 days of rework.
+   - **8. Mid-year additions:** July starters got half allowances, and their claims were adjusted. 5 days of rework and about 40 claims adjusted.
 
    </details>
 
@@ -113,6 +113,6 @@ In 2025, build ran in weeks 1 to 8, acceptance testing in weeks 9 to 11, and the
 
 - **You changed something after opening the pull request:** Commit and push to `vision-retro` again. Mona checks the pull request again on every push.
 
-- **Mona did not respond:** Check that the pull request targets `main`. You can watch the run in the [Actions tab](https://github.com/{{ full_repo_name }}/actions).
+- **Mona did not respond:** Check that the pull request targets `main`. If you changed the base branch of a pull request you had already opened, Mona doesn't notice: select **Close pull request**, then **Reopen pull request**, or push a new commit to `vision-retro`. You can watch the run in the [Actions tab](https://github.com/{{ full_repo_name }}/actions).
 
 </details>

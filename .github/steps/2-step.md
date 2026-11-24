@@ -60,7 +60,7 @@ An [OpenSpec change](https://github.com/Fission-AI/OpenSpec/blob/main/docs/conce
 
 - **None of your questions matched an answer:** That's useful evidence, not a mistake. Note which lens you skipped; step 3 measures what it would have cost.
 
-- **The folder has another name:** The folder must be exactly `openspec/changes/add-vision-rider`, all lowercase with hyphens. Right-click it in the Explorer and select **Rename...**.
+- **The folder has another name:** The folder must be exactly `openspec/changes/add-vision-rider`, all lowercase with hyphens. Right-click it in the Explorer, select **Rename...**, and type `add-vision-rider`.
 
 </details>
 
@@ -146,15 +146,15 @@ An [OpenSpec change](https://github.com/Fission-AI/OpenSpec/blob/main/docs/conce
 
 - **`Change must have at least one delta`:** Check the path, `specs/vision-rider/spec.md` inside `openspec/changes/add-vision-rider`, and the heading `## ADDED Requirements`.
 
-- **`Unknown item 'add-vision-rider'`:** The folder has another name. It must be exactly `openspec/changes/add-vision-rider`. Right-click it in the Explorer and select **Rename...**.
+- **`Unknown item 'add-vision-rider'`:** The folder has another name. It must be exactly `openspec/changes/add-vision-rider`. Right-click it in the Explorer, select **Rename...**, and type `add-vision-rider`.
 
 - **Mona counts fewer requirements than you pasted:** Copied chat text can lose its `#` characters. Each rule needs its own `### Requirement:` line and each scenario its own `#### Scenario:` line.
 
-- **Copilot added a rule the answers don't state,** such as an age limit or a number of days: Delete it, or write it down as a new question for the product owner. A plausible rule that nobody decided is still a guess.
+- **Copilot added a rule the answers don't state:** For example, an age limit or a number of days. Delete it, or write it down as a new question for the product owner. A plausible rule that nobody decided is still a guess.
 
 - **Copilot stops answering or says you've reached a limit:** Write the two requirements yourself. Copy the shape of `Setup lead time` and turn answers 1 and 6 into rules.
 
-- **`git commit` says nothing added to commit:** New files must be added first: `git add retro/answers.md openspec/changes`, then commit and push.
+- **`git commit` says `nothing added to commit`:** New files must be added first: `git add retro/answers.md openspec/changes`, then commit and push.
 
 - **`npx` asks to install a package:** Answer `n`, run `npm ci`, then run the command again.
 

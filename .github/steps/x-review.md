@@ -45,6 +45,6 @@ Pick an epic in your team's backlog before its next refinement. Write five quest
 
 <img width="800" alt="Workshop map, Spec-driven delivery workshop: four exercises, one delivery loop. 1, Trace the loop: intent to evidence. 2, Find the missing rules: before you build. 3, Deliver a behavior: test-first, with Copilot. 4, Draft your first spec: capstone. Exercise 2 is highlighted: You are here." src="../images/workshop-map.png">
 
-- Continue with exercise 3, **Deliver an Approved Behavior with Copilot**, where you build one approved behavior from its spec and scenarios.
+- Continue the workshop with exercise 3, [Deliver an Approved Behavior with Copilot](https://github.com/samueltauil/spec-driven-deliver-a-behavior), where you build one approved behavior from its spec and scenarios.
 - Read [Writing good specs](https://github.com/Fission-AI/OpenSpec/blob/main/docs/writing-specs.md) in the OpenSpec documentation to learn more about requirements and scenarios.
 - Explore more [GitHub Skills exercises](https://learn.github.com/skills).
