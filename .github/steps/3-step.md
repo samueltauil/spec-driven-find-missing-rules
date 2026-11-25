@@ -21,7 +21,7 @@ In 2025, build ran in weeks 1 to 8, acceptance testing in weeks 9 to 11, and the
 
 1. Predict: how many of the eight gaps would your questions and requirements have caught? Note the number.
 
-1. In your codespace, create `retro/gap-comparison.md` with this table.
+1. In your editor, create `retro/gap-comparison.md` with this table.
 
    ```markdown
    # Gap comparison

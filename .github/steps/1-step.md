@@ -14,6 +14,38 @@ A user story names who wants what and why, but it rarely states the **rules**: t
 
 Your copy of this repository comes with a ready-made [codespace](https://docs.github.com/en/codespaces/overview): an online editor with Node.js and the OpenSpec command-line tool already installed.
 
+<details>
+<summary>Can't use Codespaces? Work in VS Code on your computer instead</summary><br/>
+
+Set up your computer once with the workshop's [local setup guide](https://github.com/samueltauil/spec-driven-delivery-workshop/blob/main/local-setup.md): VS Code 1.116 or later with GitHub Copilot, Git, and Node.js 22.12 or later. Then follow these instructions instead of the first three codespace instructions.
+
+1. In VS Code, press `Ctrl+Shift+P` (`Cmd+Shift+P` on Mac), type `Git: Clone` and press `Enter`. Paste the address of your copy and press `Enter` again.
+
+   ```text
+   https://github.com/{{ full_repo_name }}.git
+   ```
+
+1. Choose a folder to hold the repository. When VS Code asks whether to open the cloned repository, select **Open**.
+
+1. If VS Code asks whether you trust the authors of the files in this folder, select **Yes, I trust the authors**. If it opens the folder in Restricted Mode instead, select **Manage** in the banner at the top, then **Trust**. It's your own copy, and the terminal and Copilot need a trusted folder.
+
+1. If VS Code offers to install the recommended extensions for this repository, select **Install**. If it offers to **Reopen in Container**, close that notification: that option needs Docker, and you don't need it on your computer.
+
+1. Open a terminal with `` Ctrl+` `` (also on Mac), or with **Terminal** > **New Terminal**. Install the exercise's tools, then check the OpenSpec command-line tool.
+
+   > ![Terminal command](https://img.shields.io/badge/Terminal-text?style=flat&logo=gnometerminal&labelColor=1f2328&color=eee)
+   >
+   > ```bash
+   > npm ci
+   > npx openspec --version
+   > ```
+
+   > ⏳ **Wait:** You are ready when the last line of the output is `2.0.0`.
+
+1. Below this box, skip to the fourth instruction, which starts with "Open a terminal". Your terminal is already open, so run its `git switch -c` command there.
+
+</details>
+
 1. Right-click the button below and open it in a new tab, so you can keep these instructions open.
 
    [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/{{ full_repo_name }}?quickstart=1)
@@ -44,6 +76,8 @@ Your copy of this repository comes with a ready-made [codespace](https://docs.gi
 - **The codespace opened the original exercise:** Close that tab and use the button above, which points to your copy. You can also start one from your repository page: **Code** > **Codespaces** > **Create codespace on main**.
 
 - **A command says a package is missing:** The setup did not finish. Run `npm ci` in the terminal, then try again.
+
+- **On your computer, a command fails:** Look up the error in the [troubleshooting list](https://github.com/samueltauil/spec-driven-delivery-workshop/blob/main/local-setup.md#troubleshooting) of the workshop's local setup guide. For example, on Windows, PowerShell may block `npm` with `running scripts is disabled on this system`.
 
 - **Copilot Chat asks you to sign in:** Select the Copilot icon in the Status Bar, then sign in with your GitHub account.
 
@@ -101,6 +135,8 @@ Your copy of this repository comes with a ready-made [codespace](https://docs.gi
 - **Copilot edited a file:** Check `retro/questions.md` and remove anything you didn't choose to keep. Then choose **Ask** in the chat and ask again.
 
 - **Mona says there are fewer than five questions:** Mona counts numbered lines that end with `?`, such as `2. Who can approve a shorter lead time?`. The example question counts. Start each question on its own line with a number and a period.
+
+- **On your computer, `git push` asks you to sign in:** Sign in to GitHub in your browser or in VS Code with the account that owns your copy. Never type your GitHub password in the terminal.
 
 - **Mona did not respond:** Check that `git push` finished without an error, and run `git branch --show-current`. If the branch isn't `vision-retro`, run `git switch -c vision-retro`, then `git push -u origin vision-retro`. You can watch the run in the [Actions tab](https://github.com/{{ full_repo_name }}/actions).
 

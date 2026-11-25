@@ -10,7 +10,7 @@ An [OpenSpec change](https://github.com/Fission-AI/OpenSpec/blob/main/docs/conce
 
 ### ⌨️ Activity 1: Read the answers and write the proposal
 
-1. In your codespace, create `retro/answers.md` and paste the product owner's answers into it. Read them as you go.
+1. In your editor, create `retro/answers.md` and paste the product owner's answers into it. Read them as you go.
 
    > 💡 **Tip:** To create the file, right-click the `retro` folder in the Explorer, select **New File...**, and type `answers.md`.
 
